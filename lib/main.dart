@@ -1,7 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_demo_app/menu_index.dart';
+import 'package:flutter_demo_app/menu_detail.dart';
+import 'package:flutter_demo_app/coupon_index.dart';
+import 'package:flutter_demo_app/coupon_detail.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,16 +20,69 @@ class MyApp extends StatelessWidget {
     //(2) PageViewとBottomBarを連動させるための準備
     final PageController pager = PageController();
     var state = Get.put(Controller());
+    var appBarTitle = '';
 
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.pink),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
-        //(3) ページ切替機構
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              TextButton(
+                child: const Text('Next Screen'),
+                onPressed: () => Get.toNamed(
+                    '/menu_index',
+                ),
+              ),
+              TextButton(
+                child: const Text('Next Screen'),
+                onPressed: () => Get.toNamed(
+                    '/menu_index',
+                    arguments: {
+                      "greeting": "Hello",
+                      "name": "World",
+                    }),
+              ),
+              TextButton(
+                child: const Text('Next Screen'),
+                onPressed: () => Get.toNamed(
+                    '/menu_index',
+                    arguments: {
+                      "greeting": "Hello",
+                      "name": "World",
+                    }),
+              ),
+              TextButton(
+                child: const Text('Next Screen'),
+                onPressed: () => Get.toNamed(
+                    '/menu_index',
+                    arguments: {
+                      "greeting": "Hello",
+                      "name": "World",
+                    }),
+              ),
+              TextButton(
+                child: const Text('Next Screen'),
+                onPressed: () => Get.toNamed(
+                    '/menu_index',
+                    arguments: {
+                      "greeting": "Hello",
+                      "name": "World",
+                    }),
+              ),
+            ],
+          ),
+        ),
+        appBar: AppBar(
+          // タイトルテキスト
+          title: Text(appBarTitle),
+          centerTitle: true,
+        ),
         body: PageView(
           controller: pager,
           children: const <Widget>[
-            Home(),
+            MenuIndex(),
             // Menu(),
             // Coupon(),
             Clock(),
@@ -40,7 +95,7 @@ class MyApp extends StatelessWidget {
         bottomNavigationBar: Obx(() => BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: 'Home'),
+                icon: Icon(Icons.home), label: 'メニュー'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.access_alarm_outlined), label: 'Clock'),
             BottomNavigationBarItem(
@@ -57,24 +112,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: const Text('Home',
-          style: TextStyle(color: Colors.white, fontSize: 32.0)),
-      alignment: Alignment.center,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Colors.blueAccent, Colors.white]),
-      ),
-    );
-  }
-}
 
 class Clock extends StatelessWidget {
   const Clock({Key? key}) : super(key: key);
